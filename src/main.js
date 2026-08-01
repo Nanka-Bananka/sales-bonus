@@ -5,7 +5,7 @@
  * @returns {number}
  */
 function calculateSimpleRevenue(purchase, _product, quant) {
-  const discount = 1 - purchase.discount / 100;
+  const discount = 1 - (purchase.discount / 100);
   return _product * discount * quant;
 }
 
