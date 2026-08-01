@@ -4,9 +4,9 @@
  * @param _product карточка товара
  * @returns {number}
  */
-function calculateSimpleRevenue(purchase, _product, quant) {
+function calculateSimpleRevenue(purchase, _product) {
   const discount = 1 - (purchase.discount / 100);
-  return _product * discount * quant;
+  return purchase.sale_price * discount * purchase.quantity;
 }
 
 /**
@@ -73,11 +73,7 @@ function analyzeSalesData(data, options) {
     record.items.forEach((item) => {
       const product = productIndex[item.sku];
       const cost = product["purchase_price"] * item["quantity"];
-      const revenue = calculateRevenue(
-        item,
-        item["sale_price"],
-        item["quantity"],
-      );
+      const revenue = calculateRevenue(item);
       seller["profit"] += revenue - cost;
 
       if (!(item.sku in seller.products_sold)) {
